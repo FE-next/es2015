@@ -6,7 +6,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 /**
  * - spinbox Class
- * -
+ * - 스펙을 잘 몰라서 임의로 구현
+ * - 버튼 누르면 일정시간 이후 숫자가 증가/감소
+ * - 최대값(200)/최소값(0) 을 벗어나지 않음
+ *
+ * @author jungmyung.seo
+ * @version 1.0
+ * @since 2016-01-05
  */
 
 var SpinBox = (function () {
