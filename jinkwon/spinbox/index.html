@@ -5,6 +5,36 @@
 
 <body>
 
+<div class="_spin">
+    <input type="text" data-input>
+    <input type="button" data-up-btn value="UP">
+    <input type="button" data-down-btn value="Down">
+</div>
+<div class="_spin">
+    <input type="text" data-input>
+    <input type="button" data-up-btn value="UP">
+    <input type="button" data-down-btn value="Down">
+</div>
+<div class="_spin">
+    <input type="text" data-input>
+    <input type="button" data-up-btn value="UP">
+    <input type="button" data-down-btn value="Down">
+</div>
 
+<script src="dist/spinbox.js"></script>
+<script>
+
+    var nodeLists = document.querySelectorAll('._spin');
+
+    for(var i = 0; i < nodeLists.length; i++) {
+
+
+        new SpinBox({
+            el: nodeLists[i],
+            initNum: (i + 1) * 100
+        });
+    }
+
+</script>
 </body>
 </html>
