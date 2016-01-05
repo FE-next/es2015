@@ -7,66 +7,62 @@
  * - 스핀박스가 가질 수 있는 값의 범위는 100~300 사이다.
  * written by Jinyeon.Choi
  */
+import View from './SpinBoxView';
+import Model from './SpinBoxModel';
+
 class SpinBox {
-    constructor(id) {
+    constructor(id='_spinbox') {
         this._initProp(id);
         this._initEvent();
-        this._initSpinBox();
     }
 
-    _initProp(id) {
+    _initProp(id=null) {
         this.el = document.getElementById(id);
+        this.model = new Model();
+        this.view = new View(this);
+        this.view.initInputVal();
     }
 
     _initEvent() {
         let setTimer = null;
 
-        this.el.addEventListener('mousedown', (e) => {
-            if(e.target && e.target.nodeName == 'BUTTON'){
-                if(setTimer !== null){
-                    clearInterval(setTimer);
-                }
-                if( e.target.dataset['btn'] == 'up'){
-                    setTimer = setInterval(()=>{
-                        let elInput = e.target.parentElement.querySelector('input');
-                        if(Number(elInput.value) < 300){
-                            elInput.value = Number(elInput.value) + 1;
-                        }
-                    }, 80);
-                }else{
-                    setTimer = setInterval(()=>{
-                        let elInput = e.target.parentElement.querySelector('input');
-                        if(Number(elInput.value) > 100){
-                            elInput.value = Number(elInput.value) - 1;
-                        }
-                    }, 80);
+        this.el.addEventListener('mousedown', (event) =>{
+            if (event.target && event.target.nodeName == 'BUTTON'){
+                if (event.target.dataset['btn'] === 'up'){
+                    setTimer = setInterval(() => this.view.plus(), 80);
+                } else if(event.target.dataset['btn'] === 'down'){
+                    setTimer = setInterval(() => this.view.minus(), 80);
                 }
             }
         }, false);
 
-        this.el.addEventListener('focusout', (e) => {
-            if(e.target && e.target.nodeName == 'INPUT'){
-                let val = Number(e.target.value);
-                if(isNaN(val)){
-                    e.target.value =  200;
-                }
-                if(val >=300){
-                    e.target.value = 300;
-                }else if(val <=100){
-                    e.target.value = 100;
-                }
+        document.addEventListener('mouseup', () =>{
+            clearInterval(setTimer);
+        }, false);
+
+        this.el.addEventListener('focusout', (event) => {
+            if (event.target && event.target.nodeName == 'INPUT'){
+                let inputVal = this.view.checkValue(Number(event.target.value));
+                this.view.setInputVal(inputVal);
             }
         });
-        document.addEventListener('mouseup', (e) => {
-            clearInterval(setTimer);
-        });
     }
-
-    _initSpinBox() {
-        let elInput = this.el.querySelectorAll('input');
-        for(let i = 0 ; i < elInput.length; i++){
-            elInput[i].value =  200;
-        }
+    setMax(max){
+        this.model.setMax(max);
+    }
+    setMin(min){
+        this.model.setMin(min);
+    }
+    setAdd(num){
+        this.model.setAdd(num);
+    }
+    setMinus(num){
+        this.model.setMinus(num);
+    }
+    setInit(num){
+        this.model.setNum(num);
     }
 }
 
+
+new SpinBox();
