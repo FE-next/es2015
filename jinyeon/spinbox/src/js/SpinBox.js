@@ -9,16 +9,16 @@
  */
 class SpinBox {
     constructor(id) {
-        this.initProp(id);
-        this.initEvent();
-        this.initSpinBox();
+        this._initProp(id);
+        this._initEvent();
+        this._initSpinBox();
     }
 
-    initProp(id) {
+    _initProp(id) {
         this.el = document.getElementById(id);
-}
+    }
 
-    initEvent() {
+    _initEvent() {
         let setTimer = null;
 
         this.el.addEventListener('mousedown', (e) => {
@@ -43,6 +43,7 @@ class SpinBox {
                 }
             }
         }, false);
+
         this.el.addEventListener('focusout', (e) => {
             if(e.target && e.target.nodeName == 'INPUT'){
                 let val = Number(e.target.value);
@@ -61,7 +62,7 @@ class SpinBox {
         });
     }
 
-    initSpinBox() {
+    _initSpinBox() {
         let elInput = this.el.querySelectorAll('input');
         for(let i = 0 ; i < elInput.length; i++){
             elInput[i].value =  200;
