@@ -15,88 +15,70 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  */
 
 var SpinBox = (function () {
-    function SpinBox() {
+    function SpinBox(id) {
         _classCallCheck(this, SpinBox);
 
-        this.appendElement();
-        this.initProp();
+        this.initProp(id);
         this.initEvent();
         this.initSpinBox();
     }
 
     _createClass(SpinBox, [{
-        key: 'appendElement',
-        value: function appendElement() {
-            var elNode = document.createElement('div');
-            var elSpinBox = '<input type="text" value="" data-spin-input><button data-up-btn >▲</button><button data-down-btn >▼</button>';
-            elNode.innerHTML = elSpinBox;
-            document.body.appendChild(elNode);
-        }
-    }, {
         key: 'initProp',
-        value: function initProp() {
-            this.elInput = document.querySelector('[data-spin-input]');
-            this.elUpButton = document.querySelector('[data-up-btn]');
-            this.elDownButton = document.querySelector('[data-down-btn]');
+        value: function initProp(id) {
+            this.el = document.getElementById(id);
         }
     }, {
         key: 'initEvent',
         value: function initEvent() {
-            var _this = this;
+            var setTimer = null;
 
-            var setUpTimer = null;
-            var setDownTimer = null;
-            this.elInput.addEventListener('focusout', function (e) {
-                var val = Number(_this.elInput.value);
-                if (isNaN(val)) {
-                    _this.initSpinBox();
-                    return;
+            this.el.addEventListener('mousedown', function (e) {
+                if (e.target && e.target.nodeName == 'BUTTON') {
+                    if (setTimer !== null) {
+                        clearInterval(setTimer);
+                    }
+                    if (e.target.dataset['btn'] == 'up') {
+                        setTimer = setInterval(function () {
+                            var elInput = e.target.parentElement.querySelector('input');
+                            if (Number(elInput.value) < 300) {
+                                elInput.value = Number(elInput.value) + 1;
+                            }
+                        }, 80);
+                    } else {
+                        setTimer = setInterval(function () {
+                            var elInput = e.target.parentElement.querySelector('input');
+                            if (Number(elInput.value) > 100) {
+                                elInput.value = Number(elInput.value) - 1;
+                            }
+                        }, 80);
+                    }
                 }
-                _this.limitSpinBox(val);
+            }, false);
+            this.el.addEventListener('focusout', function (e) {
+                if (e.target && e.target.nodeName == 'INPUT') {
+                    var val = Number(e.target.value);
+                    if (isNaN(val)) {
+                        e.target.value = 200;
+                    }
+                    if (val >= 300) {
+                        e.target.value = 300;
+                    } else if (val <= 100) {
+                        e.target.value = 100;
+                    }
+                }
             });
-            this.elUpButton.addEventListener('mousedown', function (e) {
-                setUpTimer = setInterval(_this.plusSpinBox.bind(_this), 80);
-            });
-            this.elUpButton.addEventListener('mouseup', function (e) {
-                clearTimeout(setUpTimer);
-            });
-
-            this.elDownButton.addEventListener('mousedown', function (e) {
-                setDownTimer = setInterval(_this.minusSpinBox.bind(_this), 80);
-            });
-            this.elDownButton.addEventListener('mouseup', function (e) {
-                clearTimeout(setDownTimer);
+            document.addEventListener('mouseup', function (e) {
+                clearInterval(setTimer);
             });
         }
     }, {
         key: 'initSpinBox',
         value: function initSpinBox() {
-            this.elInput.value = 200;
-        }
-    }, {
-        key: 'plusSpinBox',
-        value: function plusSpinBox() {
-            var val = Number(this.elInput.value) + 1;
-            this.limitSpinBox(val);
-        }
-    }, {
-        key: 'minusSpinBox',
-        value: function minusSpinBox() {
-            var val = Number(this.elInput.value) - 1;
-            this.limitSpinBox(val);
-        }
-    }, {
-        key: 'limitSpinBox',
-        value: function limitSpinBox(val) {
-            if (val > 300) {
-                this.elInput.value = 300;
-                return false;
-            } else if (val < 100) {
-                this.elInput.value = 100;
-                return false;
+            var elInput = this.el.querySelectorAll('input');
+            for (var i = 0; i < elInput.length; i++) {
+                elInput[i].value = 200;
             }
-            this.elInput.value = val;
-            return true;
         }
     }]);
 
