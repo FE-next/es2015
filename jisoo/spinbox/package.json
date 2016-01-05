@@ -1,0 +1,24 @@
+{
+  "name": "spinbox",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "devDependencies": {
+    "babel-core": "^6.3.26",
+    "babel-loader": "^6.2.0",
+    "bulk-require": "^0.2.1",
+    "del": "^2.2.0",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^6.1.1",
+    "gulp-watch": "^4.3.5",
+    "gulp-webpack": "^1.5.0",
+    "jquery": "^2.1.4",
+    "run-sequence": "^1.1.5",
+    "webpack": "^1.12.9"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
