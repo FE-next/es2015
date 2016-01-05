@@ -1,0 +1,24 @@
+{
+  "name": "spinbox",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "babel-preset-es2015": "^6.3.13",
+    "babel": "^6.3.26"
+  },
+  "devDependencies": {
+    "babel": "^6.3.26",
+    "babel-cli": "^6.3.17",
+    "babel-preset-es2015": "^6.3.13"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel --presets es2015 src/ -d dist/"
+  },
+  "keywords": [
+    "es2015"
+  ],
+  "author": "lovedove79@gmail.com",
+  "license": "ISC"
+}

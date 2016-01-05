@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head><title>es2015 spinbox</title>
+</head>
+
+<body>
+
+<div id="_spinboxArea">
+    <input type="text" id="_textArea" readonly value="0">
+    <button data-type="up">up</button>
+    <button data-type="down">down</button>
+</div>
+
+<script src="./dist/spinbox.js"></script>
+
+<script type="text/javascript">
+    var oSpinboxData = {
+        "maxValue" : 200,
+        "nInterval" : 100,
+        "elDivSpinbox" : "_spinboxArea"
+    };
+    var Spinbox = new SpinBox(oSpinboxData);
+</script>
+</body>
+</html>
