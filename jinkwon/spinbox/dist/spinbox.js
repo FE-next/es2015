@@ -63,6 +63,12 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
+	var PI = {
+	    test: 123
+	};
+	
+	PI.test = 321;
+	
 	var SpinBox = (function () {
 	    function SpinBox(options) {
 	        _classCallCheck(this, SpinBox);
@@ -114,7 +120,6 @@
 	
 	            this._elUpBtn.addEventListener('mousedown', function () {
 	                _this2.model.increase();
-	
 	                _this2._createInterval(function () {
 	                    _this2.model.increase();
 	                });
@@ -122,7 +127,6 @@
 	
 	            this._elDownBtn.addEventListener('mousedown', function () {
 	                _this2.model.decrease();
-	
 	                _this2._createInterval(function () {
 	                    _this2.model.decrease();
 	                });
