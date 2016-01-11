@@ -7,20 +7,17 @@
  * - 스핀박스가 가질 수 있는 값의 범위는 100~300 사이다.
  * written by Jinyeon.Choi
  */
-import View from './SpinBoxView';
 import Model from './SpinBoxModel';
 
-class SpinBox {
+class SpinBox extends Model {
     constructor(id='_spinbox') {
+        super(id);
         this._initProp(id);
         this._initEvent();
     }
 
-    _initProp(id=null) {
+    _initProp(id) {
         this.el = document.getElementById(id);
-        this.model = new Model();
-        this.view = new View(this);
-        this.view.initInputVal();
     }
 
     _initEvent() {
@@ -29,9 +26,15 @@ class SpinBox {
         this.el.addEventListener('mousedown', (event) =>{
             if (event.target && event.target.nodeName == 'BUTTON'){
                 if (event.target.dataset['btn'] === 'up'){
-                    setTimer = setInterval(() => this.view.plus(), 80);
+                    setTimer = setInterval(() => {
+                        this.increase();
+                        this.setNum(this.checkVal(this.num));
+                    }, 80);
                 } else if(event.target.dataset['btn'] === 'down'){
-                    setTimer = setInterval(() => this.view.minus(), 80);
+                    setTimer = setInterval(() => {
+                        this.decrease();
+                        this.setNum(this.checkVal(this.num));
+                    }, 80);
                 }
             }
         }, false);
@@ -42,27 +45,28 @@ class SpinBox {
 
         this.el.addEventListener('focusout', (event) => {
             if (event.target && event.target.nodeName == 'INPUT'){
-                let inputVal = this.view.checkValue(Number(event.target.value));
-                this.view.setInputVal(inputVal);
+                this.setNum(this.checkVal(Number(event.target.value)));
             }
         });
     }
-    setMax(max){
-        this.model.setMax(max);
+
+    checkVal(num) {
+        if(isNaN(num)){
+            return this.defaultVal;
+        }
+        return this.checkLimit(num);
     }
-    setMin(min){
-        this.model.setMin(min);
-    }
-    setAdd(num){
-        this.model.setAdd(num);
-    }
-    setMinus(num){
-        this.model.setMinus(num);
-    }
-    setInit(num){
-        this.model.setNum(num);
+
+    checkLimit(num) {
+        if (num > this.max) {
+            return this.max;
+        } else if (num < this.min) {
+            return this.min;
+        }
+        return num;
     }
 }
 
 
-new SpinBox();
+window.Spinbox = SpinBox;
+new Spinbox();
