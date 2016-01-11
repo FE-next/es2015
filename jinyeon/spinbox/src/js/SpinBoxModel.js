@@ -1,20 +1,22 @@
 /**
  * Created by chy58 on 2016-01-04.
  */
-
+const defaultVal = 200;
 class Model{
-    constructor(){
-        this.num = 200;
+    constructor(id){
         this.max = 300;
         this.min = 100;
         this.add = 1;
         this.minus = -1;
+        this.elInput = document.getElementById(id).getElementsByTagName('input')[0];
+        this.elInput.value = this.defaultVal = this.num = defaultVal;
     }
     getNum(){
         return this.num;
     }
     setNum(num){
         this.num = num;
+        this.elInput.value = num;
     }
     getMax(){
         return this.max;
@@ -28,17 +30,12 @@ class Model{
     setMin(min){
         this.min = min;
     }
-    getIncreaseNum(){
-        return this.add;
+    increase(){
+        this.num += this.add;
     }
-    setIncreaseNum(num){
-        this.add = num;
+    decrease(){
+        this.num += this.minus;
     }
-    getDecreaseNum(){
-        return this.minus;
-    }
-    setDecreaseNum(num){
-        return this.minus = num;
-    }
+
 }
 export default Model;

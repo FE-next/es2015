@@ -46,21 +46,9 @@
 
 	'use strict';
 
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })(); /**
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * - 웹 페이지에 하나 이상의 스핀박스 HTML를 넣을 수 있다.
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * - 스핀박스 기본 값은 사용자가 지정할 수 있다.
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * - 사용자가 숫자가 아닌 값을 집어넣어주었을때 200으로 설정한다.
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * - 사용자가 기본 값을 지정하지 않으면 자동으로 200으로 설정한다.
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * - ▲ 버튼을 누르면 값이 1 증가, ▼ 버튼을 누르면 값이 1 감소한다.
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * - 스핀박스가 가질 수 있는 값의 범위는 100~300 사이다.
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * written by Jinyeon.Choi
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-	var _SpinBoxView = __webpack_require__(1);
-
-	var _SpinBoxView2 = _interopRequireDefault(_SpinBoxView);
-
-	var _SpinBoxModel = __webpack_require__(2);
+	var _SpinBoxModel = __webpack_require__(1);
 
 	var _SpinBoxModel2 = _interopRequireDefault(_SpinBoxModel);
 
@@ -68,30 +56,42 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var SpinBox = (function () {
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * - 웹 페이지에 하나 이상의 스핀박스 HTML를 넣을 수 있다.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * - 스핀박스 기본 값은 사용자가 지정할 수 있다.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * - 사용자가 숫자가 아닌 값을 집어넣어주었을때 200으로 설정한다.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * - 사용자가 기본 값을 지정하지 않으면 자동으로 200으로 설정한다.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * - ▲ 버튼을 누르면 값이 1 증가, ▼ 버튼을 누르면 값이 1 감소한다.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * - 스핀박스가 가질 수 있는 값의 범위는 100~300 사이다.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * written by Jinyeon.Choi
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+	var SpinBox = (function (_Model) {
+	    _inherits(SpinBox, _Model);
+
 	    function SpinBox() {
 	        var id = arguments.length <= 0 || arguments[0] === undefined ? '_spinbox' : arguments[0];
 
 	        _classCallCheck(this, SpinBox);
 
-	        this._initProp(id);
-	        this._initEvent();
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SpinBox).call(this, id));
+
+	        _this._initProp(id);
+	        _this._initEvent();
+	        return _this;
 	    }
 
 	    _createClass(SpinBox, [{
 	        key: '_initProp',
-	        value: function _initProp() {
-	            var id = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
-
+	        value: function _initProp(id) {
 	            this.el = document.getElementById(id);
-	            this.model = new _SpinBoxModel2.default();
-	            this.view = new _SpinBoxView2.default(this);
-	            this.view.initInputVal();
 	        }
 	    }, {
 	        key: '_initEvent',
 	        value: function _initEvent() {
-	            var _this = this;
+	            var _this2 = this;
 
 	            var setTimer = null;
 
@@ -99,11 +99,13 @@
 	                if (event.target && event.target.nodeName == 'BUTTON') {
 	                    if (event.target.dataset['btn'] === 'up') {
 	                        setTimer = setInterval(function () {
-	                            return _this.view.plus();
+	                            _this2.increase();
+	                            _this2.setNum(_this2.checkVal(_this2.num));
 	                        }, 80);
 	                    } else if (event.target.dataset['btn'] === 'down') {
 	                        setTimer = setInterval(function () {
-	                            return _this.view.minus();
+	                            _this2.decrease();
+	                            _this2.setNum(_this2.checkVal(_this2.num));
 	                        }, 80);
 	                    }
 	                }
@@ -115,42 +117,35 @@
 
 	            this.el.addEventListener('focusout', function (event) {
 	                if (event.target && event.target.nodeName == 'INPUT') {
-	                    var inputVal = _this.view.checkValue(Number(event.target.value));
-	                    _this.view.setInputVal(inputVal);
+	                    _this2.setNum(_this2.checkVal(Number(event.target.value)));
 	                }
 	            });
 	        }
 	    }, {
-	        key: 'setMax',
-	        value: function setMax(max) {
-	            this.model.setMax(max);
+	        key: 'checkVal',
+	        value: function checkVal(num) {
+	            if (isNaN(num)) {
+	                return this.defaultVal;
+	            }
+	            return this.checkLimit(num);
 	        }
 	    }, {
-	        key: 'setMin',
-	        value: function setMin(min) {
-	            this.model.setMin(min);
-	        }
-	    }, {
-	        key: 'setAdd',
-	        value: function setAdd(num) {
-	            this.model.setAdd(num);
-	        }
-	    }, {
-	        key: 'setMinus',
-	        value: function setMinus(num) {
-	            this.model.setMinus(num);
-	        }
-	    }, {
-	        key: 'setInit',
-	        value: function setInit(num) {
-	            this.model.setNum(num);
+	        key: 'checkLimit',
+	        value: function checkLimit(num) {
+	            if (num > this.max) {
+	                return this.max;
+	            } else if (num < this.min) {
+	                return this.min;
+	            }
+	            return num;
 	        }
 	    }]);
 
 	    return SpinBox;
-	})();
+	})(_SpinBoxModel2.default);
 
-	new SpinBox();
+	window.Spinbox = SpinBox;
+	new Spinbox();
 
 /***/ },
 /* 1 */
@@ -169,143 +164,60 @@
 	/**
 	 * Created by chy58 on 2016-01-04.
 	 */
-
-	var View = (function () {
-	    function View(core) {
-	        _classCallCheck(this, View);
-
-	        this.core = core;
-	        this.el = this.core.el.querySelector('input');
-	    }
-
-	    _createClass(View, [{
-	        key: 'initInputVal',
-	        value: function initInputVal() {
-	            this.el.value = this.core.model.getNum();
-	        }
-	    }, {
-	        key: 'setInputVal',
-	        value: function setInputVal(val) {
-	            this.core.model.setNum(val);
-	            this.el.value = val;
-	        }
-	    }, {
-	        key: 'plus',
-	        value: function plus() {
-	            var val = this.core.model.getNum() + this.core.model.getIncreaseNum();
-	            this.setInputVal(this.checkLimit(val));
-	        }
-	    }, {
-	        key: 'minus',
-	        value: function minus() {
-	            var val = this.core.model.getNum() + this.core.model.getDecreaseNum();
-	            this.setInputVal(this.checkLimit(val));
-	        }
-	    }, {
-	        key: 'checkValue',
-	        value: function checkValue(val) {
-	            if (isNaN(val)) {
-	                return 200;
-	            }
-	            return this.checkLimit(val);
-	        }
-	    }, {
-	        key: 'checkLimit',
-	        value: function checkLimit(val) {
-	            var max = this.core.model.getMax();
-	            var min = this.core.model.getMin();
-	            if (val > max) {
-	                return max;
-	            } else if (val < min) {
-	                return min;
-	            }
-	            return val;
-	        }
-	    }]);
-
-	    return View;
-	})();
-
-	exports.default = View;
-
-/***/ },
-/* 2 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	/**
-	 * Created by chy58 on 2016-01-04.
-	 */
+	var defaultVal = 200;
 
 	var Model = (function () {
-	    function Model() {
+	    function Model(id) {
 	        _classCallCheck(this, Model);
 
-	        this.num = 200;
 	        this.max = 300;
 	        this.min = 100;
 	        this.add = 1;
 	        this.minus = -1;
+	        this.elInput = document.getElementById(id).getElementsByTagName('input')[0];
+	        this.elInput.value = this.defaultVal = this.num = defaultVal;
 	    }
 
 	    _createClass(Model, [{
-	        key: "getNum",
+	        key: 'getNum',
 	        value: function getNum() {
 	            return this.num;
 	        }
 	    }, {
-	        key: "setNum",
+	        key: 'setNum',
 	        value: function setNum(num) {
 	            this.num = num;
+	            this.elInput.value = num;
 	        }
 	    }, {
-	        key: "getMax",
+	        key: 'getMax',
 	        value: function getMax() {
 	            return this.max;
 	        }
 	    }, {
-	        key: "setMax",
+	        key: 'setMax',
 	        value: function setMax(max) {
 	            this.max = max;
 	        }
 	    }, {
-	        key: "getMin",
+	        key: 'getMin',
 	        value: function getMin() {
 	            return this.min;
 	        }
 	    }, {
-	        key: "setMin",
+	        key: 'setMin',
 	        value: function setMin(min) {
 	            this.min = min;
 	        }
 	    }, {
-	        key: "getIncreaseNum",
-	        value: function getIncreaseNum() {
-	            return this.add;
+	        key: 'increase',
+	        value: function increase() {
+	            this.num += this.add;
 	        }
 	    }, {
-	        key: "setIncreaseNum",
-	        value: function setIncreaseNum(num) {
-	            this.add = num;
-	        }
-	    }, {
-	        key: "getDecreaseNum",
-	        value: function getDecreaseNum() {
-	            return this.minus;
-	        }
-	    }, {
-	        key: "setDecreaseNum",
-	        value: function setDecreaseNum(num) {
-	            return this.minus = num;
+	        key: 'decrease',
+	        value: function decrease() {
+	            this.num += this.minus;
 	        }
 	    }]);
 
