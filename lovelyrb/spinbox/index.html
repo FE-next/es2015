@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="_spinbox">
+    <input type="text" id="_textArea">
+    <input type="button" id="_up" value="UP">
+    <input type="button" id="_down" value="DOWN">
+</div>
+
+<script src="dist/spinbox.js"></script>
+<script>
+    var spinbox = new Spinbox({
+        el : document.getElementById('_spinbox'),
+        num : 200
+    })
+</script>
+</body>
+</html>
