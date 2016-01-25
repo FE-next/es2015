@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Symbol</title>
+</head>
+
+<body>
+
+<div id="_square" style="top:15px;left:15px;width:600px;height:600px;background:green;"></div>
+
+
+<script type="text/javascript">
+var elSquare = document.getElementById('_square');
+var isMoving = Symbol("isMoving");
+
+function moveSquare(){
+  if(!elSquare[isMoving]) {
+    elSquare[isMoving] = true;
+  }
+
+  var nVal = parseInt(elSquare.style.width, 10) - 2;
+
+  elSquare.style.width = nVal + 'px';
+  elSquare.style.height = nVal + 'px';
+  console.log("moving...", elSquare[isMoving]);
+
+  if(nVal < 200){
+    clearInterval(oInterval);
+    elSquare[isMoving] = false;
+    console.log("stop!!!", elSquare[isMoving]);
+
+    printElsquare();
+  }
+}
+
+var oInterval = setInterval(moveSquare, 20);
+
+function printElsquare(){
+  console.log("arr", elSquare[isMoving]);
+  console.log("dot", elSquare.isMoving);
+
+  for (var key in elSquare){
+    console.log(key);
+  }
+}
+</script>
+</body>
+
+</html>
